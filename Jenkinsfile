@@ -19,7 +19,7 @@ pipeline {
         stage('secuirty-scans-on-image') {
             steps {
                 catchError{
-                sh 'sudo docker run --rm aquasec/trivy:0.18.3 vhmds/new-flask-app'
+                sh 'sudo trivy image vhmds/new-flask-app'
                 }
             }
         }
