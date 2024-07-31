@@ -1,0 +1,4 @@
+.venv/
+bendit-test
+docker-compose.yml
+jenkinsfile
