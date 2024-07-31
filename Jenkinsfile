@@ -5,7 +5,7 @@ pipeline {
         stage('run-secuirty-tests') {
             steps {
                 catchError{
-                sh 'sudo docker run --rm vhmds/bandit .' 
+                sh 'sudo docker run --rm vhmds/bandit app.py' 
                 }
             }
         }
