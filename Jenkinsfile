@@ -2,20 +2,25 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('run-secuirty-tests') {
             steps {
-                sh 'echo "building....."' 
+                sh 'sudo docker run --rm vhmds/bandit .' 
             }
         }
-        stage('Testing') {
+        stage('build-the-image') {
             steps {
-                sh 'echo "Testing....."'
+                sh 'sudo docker build -t vhmds/new-flask-app .'
             }
         }
-        stage('Deploy') {
+        stage('secuirty-scans-on-image') {
             steps {
-                sh 'echo "Deploying....."'
+                sh 'sudo docker run --rm aquasec/trivy:0.18.3 vhmds/new-flask-app'
             }
         }
+       stage('push-to-docker-hub') {
+            steps {
+                sh 'sudo docker push vhmds/new-flask-app'
+            }
+        } 
     }
 }

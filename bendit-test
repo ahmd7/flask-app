@@ -1,0 +1,15 @@
+FROM python:3.11-slim
+
+# Install Bandit
+RUN pip install bandit
+
+# Set the working directory
+WORKDIR /app
+
+# Copy your Flask app code into the container
+COPY ../ /app/
+
+ENTRYPOINT [ "bandit","-r"]
+
+# Run Bandit
+CMD ["."]
